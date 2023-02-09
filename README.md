@@ -4,4 +4,4 @@
 php LaravelApplicationStart.php 
 
 ## 跳env错误如何解决
-再报告中点击配置，然后重启ApplicationStart即可
+报告中点击自动配置，然后重启ApplicationStart即可
