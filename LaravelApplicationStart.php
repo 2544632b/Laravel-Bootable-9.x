@@ -70,7 +70,8 @@ while(true) {
                     }
                     for($j = 0; $j < count($post_line); $j++) {
                         $post_kv = explode("=", $post_line[$j]);
-                        $_POST[$post_kv[0]] = $post_kv[1];
+                        $post_kv_1_result = urldecode($post_kv[1]);
+                        $_POST[$post_kv[0]] = $post_kv_1_result;
                     }
                 }
             }
