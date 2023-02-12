@@ -64,6 +64,14 @@ while(true) {
                 $_SERVER['SERVER_PROTOCOL'] = $path[2];
                 if($_SERVER['REQUEST_METHOD'] == "POST") {
                     $buffer_post = socket_read($newSocket, 400000);
+                    $post_line = explode("&", $buffer_post);
+                    if(empty($post_line)) {
+                        socket_close($newSocket);
+                    }
+                    for($j = 0; $j < count($post_line); $j++) {
+                        $post_kv = explode("=", $post_line[$j]);
+                        $_POST[$post_kv[0]] = $post_kv[1];
+                    }
                 }
             }
             else {
@@ -96,6 +104,9 @@ while(true) {
                         break;
                     case 'Cookie':
                         $cookie_line = explode(';', $value[1]);
+                        if(empty($cookie_line)) {
+                            socket_close($newSocket);
+                        }
                         for($k = 0; $k < count($cookie_line); $k++) {
                             $cookie_kv = explode('=', $cookie_line[$k]);
                             $_COOKIE[$cookie_kv[0]] = $cookie_kv[1];
