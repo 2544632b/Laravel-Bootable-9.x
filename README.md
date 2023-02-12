@@ -1,3 +1,17 @@
+## 测试前言
+这种构思并没有出现的过早，因为并不符合绝大部分FPM/CGI的运行。
+出现的比较晚，octane可能会出现最多4年+，而webman则是22年的产物。
+传统的PHP CGI则需要对脚本进行不停的【启动】、【载入内存】等等，最后再【执行】、【内存销毁】 or 【保存到硬盘】
+面对当今互联网环境上越来越大量和越来越复杂的请求，显然这样的模式并不适合今天的环境。
+而laravel则作为一个以控制反转（IoC）和面向切面（AOP）的框架程序，随着对服务、数据访问/持久层（DAO）的增加，
+并不适合这样频繁的执行上述的步骤，无法发挥出自身框架带来的优势，
+ODBC/PDO也必须将连接对象重复的存储到硬盘，再载入到内存，周而复始。
+
+## 思路
+抛弃传统的CGI模式，让PHP变成可编程脚本，将启动时所需要的容器一次载入，创建[http]对象，（真的，真的没找到高性能的http框架，request都没有）
+载入连接，将http头补丁到PHP的全局变量，再用Laravel/Symfony对请求进行拍照，最后再执行框架（容器和切面已经预热好）
+
+## Laravel Readme
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
