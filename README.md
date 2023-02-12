@@ -9,7 +9,7 @@ ODBC/PDO也必须将连接对象重复的存储到硬盘，再载入到内存，
 
 ## 思路
 抛弃传统的CGI模式，让PHP变成可编程脚本，将启动时所需要的容器一次载入，创建[http]对象，（真的，真的没找到高性能的http框架，request都没有）
-载入连接，将http头补丁到PHP的全局变量，再用Laravel/Symfony对请求进行拍照，最后再执行框架（容器和切面已经预热好）
+载入连接，将http头补丁到PHP的全局变量，再用Symfony/Laravel对请求进行拍照，最后再执行框架（容器和切面已经预热好）
 
 ## Laravel Readme
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
